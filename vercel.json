@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/d/:slug",
+      "destination": "/watch.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
