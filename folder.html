@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Manager</title>
+    <style>
+        body { font-family: sans-serif; background: #141d2a; color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .box { background: #192330; padding: 25px; border-radius: 12px; width: 100%; max-width: 500px; border: 1px solid #222f3e; }
+        input, button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: white; }
+        button { background: #1877f2; cursor: pointer; font-weight: bold; }
+        .del-btn { background: #e74c3c; width: auto; padding: 5px 10px; font-size: 12px; }
+        .list-item { background: #222f3e; padding: 10px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 6px; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Admin Generator</h2>
+    <input type="text" id="vidTitle" placeholder="Judul Video">
+    <input type="text" id="vidUrl" placeholder="URL Video">
+    <input type="text" id="vidSlug" placeholder="Folder Slug (opsional)">
+    <button onclick="generate()">Generate Link</button>
+    <div id="result" style="display:none; margin-top:15px;">
+        <input type="text" id="shareLink" readonly>
+    </div>
+</div>
+
+<div class="box" style="margin-top:20px;">
+    <h3>Daftar Video</h3>
+    <div id="videoList">Memuat...</div>
+</div>
+
+<script>
+    const SUPABASE_URL = "https://xgmsumukxuwjpztbeuwl.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnbXN1bXVreHV3anB6dGJldXdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NTE1MzYsImV4cCI6MjA5NTQyNzUzNn0.25t9t71O0O2D11l7GRXtpvOgC2sllXE3xB4nsRKK4oE";
+
+    // Fungsi Fetch & Tampilkan List
+    async function loadVideos() {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/videos_list?select=*&order=id.desc`, {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+        });
+        const data = await res.json();
+        const list = document.getElementById('videoList');
+        list.innerHTML = data.map(v => `
+            <div class="list-item">
+                <span>${v.name} (${v.slug})</span>
+                <button class="del-btn" onclick="deleteVideo(${v.id})">Hapus</button>
+            </div>
+        `).join('');
+    }
+
+    async function deleteVideo(id) {
+        if (!confirm("Hapus video ini?")) return;
+        await fetch(`${SUPABASE_URL}/rest/v1/videos_list?id=eq.${id}`, {
+            method: 'DELETE',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+        });
+        loadVideos();
+    }
+
+    async function generate() {
+        // ... kode generate sama seperti sebelumnya ...
+        const title = document.getElementById('vidTitle').value;
+        const url = document.getElementById('vidUrl').value;
+        let slug = document.getElementById('vidSlug').value || Math.random().toString(36).substring(7);
+        
+        await fetch(`${SUPABASE_URL}/rest/v1/videos_list`, {
+            method: 'POST',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+            body: JSON.stringify({ name: title, url: url, slug: slug })
+        });
+        loadVideos(); // Refresh daftar
+        alert("Berhasil!");
+    }
+
+    loadVideos();
+</script>
+</body>
+</html>
