@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Link Generator with Random Slug</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-100 font-sans text-slate-800">
+
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- SIDEBAR -->
+        <div class="w-64 bg-slate-900 text-white flex flex-col hidden md:flex">
+            <div class="p-5 text-xl font-bold tracking-wider border-b border-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-link text-blue-500"></i> AdminPanel
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 text-white font-medium transition">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Slug Generator
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-chart-simple"></i> Analytics
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-800 text-xs text-slate-500 text-center">
+                v1.2.0 &copy; 2026
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT AREA -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            
+            <!-- NAVBAR -->
+            <header class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-slate-800">Random Slug Generator</h1>
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-medium text-slate-600">Admin Mode</span>
+                    <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">A</div>
+                </div>
+            </header>
+
+            <!-- CONTENT -->
+            <main class="p-6 max-w-4xl w-full mx-auto space-y-6">
+                
+                <!-- GENERATOR FORM CARD -->
+                <div class="bg-white rounded-xl shadow-xs border border-slate-200 p-6">
+                    <h2 class="text-lg font-semibold mb-4 text-slate-700 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-blue-500"></i> Buat Link & Slug Acak
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <!-- Input URL Domain Utama -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Domain Anda / Base URL</label>
+                            <input type="text" id="baseUrl" value="https://gofile.mom" placeholder="https://gigafile.top" 
+                                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <p class="text-xs text-slate-400 mt-1">Ganti dengan domain web milikmu sendiri.</p>
+                        </div>
+
+                        <!-- Opsi Panjang Slug -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Panjang Karakter Slug</label>
+                            <select id="slugLength" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="5">5 Karakter</option>
+                                <option value="6" selected>6 Karakter</option>
+                                <option value="7">7 Karakter</option>
+                            </select>
+                        </div>
+
+                        <!-- Tombol Aksi -->
+                        <button onclick="generateSlugLink()" 
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-2 cursor-pointer shadow-md">
+                            <i class="fa-solid fa-shuffle"></i> Acak & Generate Link sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- RESULT CARD -->
+                <div id="resultCard" class="bg-white rounded-xl shadow-sm border-2 border-emerald-500 p-6 hidden">
+                    <h2 class="text-lg font-semibold mb-3 text-emerald-700 flex items-center gap-2">
+                        <i class="fa-solid fa-square-check"></i> Link Hasil Acak Berhasil Dibuat!
+                    </h2>
+                    
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="text" id="outputUrl" readonly 
+                            class="flex-1 px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg text-blue-600 font-mono text-base font-bold tracking-wide focus:outline-none">
+                        <button onclick="copyToClipboard()" 
+                            class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-6 rounded-lg transition flex items-center justify-center gap-2 cursor-pointer min-w-[120px]">
+                            <i class="fa-solid fa-copy"></i> <span id="copyBtnText">Salin Link</span>
+                        </button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Fungsi murni pembuat string acak (Slug)
+        function generateRandomString(length) {
+            let result = '';
+            // Kombinasi karakter huruf besar, kecil, dan angka
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function generateSlugLink() {
+            let domainInput = document.getElementById('baseUrl').value.trim();
+            const lengthInput = parseInt(document.getElementById('slugLength').value);
+
+            if (!domainInput) {
+                alert('Kolom Domain tidak boleh kosong!');
+                return;
+            }
+
+            // Otomatis tambahkan https:// jika user lupa menulisnya
+            if (!/^https?:\/\//i.test(domainInput)) {
+                domainInput = 'https://' + domainInput;
+                document.getElementById('baseUrl').value = domainInput;
+            }
+
+            // Pastikan di ujung domain ada tanda garing '/'
+            if (!domainInput.endsWith('/')) {
+                domainInput += '/';
+            }
+
+            // Jalankan fungsi pengocok slug acak
+            const randomSlug = generateRandomString(lengthInput);
+            
+            // Satukan Domain + Slug Acak
+            const finalResult = domainInput + randomSlug;
+
+            // Masukkan hasil ke kotak output
+            document.getElementById('outputUrl').value = finalResult;
+            
+            // Tampilkan kotak hasil yang tadinya tersembunyi
+            const resultCard = document.getElementById('resultCard');
+            resultCard.classList.remove('hidden');
+            
+            // Reset text tombol salin
+            document.getElementById('copyBtnText').innerText = "Salin Link";
+        }
+
+        function copyToClipboard() {
+            const outputUrl = document.getElementById('outputUrl');
+            outputUrl.select();
+            outputUrl.setSelectionRange(0, 99999); // Untuk HP
+
+            navigator.clipboard.writeText(outputUrl.value).then(() => {
+                const btnText = document.getElementById('copyBtnText');
+                btnText.innerText = "Tersalin!";
+                setTimeout(() => {
+                    btnText.innerText = "Salin Link";
+                }, 2000);
+            }).catch(err => {
+                alert('Gagal menyalin otomatis, silakan blok teks lalu copy manual.');
+            });
+        }
+    </script>
+</body>
+</html>
