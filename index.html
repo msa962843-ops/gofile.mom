@@ -1,92 +1,151 @@
  <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@YourTwitterHandle">
-<meta name="twitter:title" content="Gofile">
-<meta name="twitter:description" content="file shared with Gofile">
-<meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOxer8DqjT9jE02sMrOlu_BMXRd1eDDqNpOE8s97gCY5OrMVgthE7454wZGtH_yM0EY5KsUSepjXSEQxJrYl5uGYHCiM7shcEVU6yqg_jUjfpH5LtvrgT1VOQeG9NS2x6tu0ZVuvjeuHEc_81Ug4iQwCfeu_5dHrOakILkjYdYL1ZXEVrAYXuTUItwl5fD/s1000/bafkreid2h5exti42fccpeqjf7abww6kayclccrng2ef4muoojhhyubh2q4.webp">
-<meta name="twitter:image:alt" content="Gofile">
-
-<meta name="twitter:url" content="https://example.com">
- 
-    <meta charset="UTF-8">
+   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gofile next</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Animasi rotasi yang sangat lancar (linear) */
-        @keyframes spin-smooth {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+ <meta name="description" content="Secure, fast and free cloud storage solution. Upload and share files instantly with Gofile's simple cloud storage platform." />
+  <meta name="robots" content="index, follow" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#162036" />
 
-        .spinner-container {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
-        .spinner-ring {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            /* Membuat lengkungan biru tipis dengan gradasi */
-            border: 3px solid transparent;
-            border-top: 3px solid #3b82f6; 
-            border-right: 1px solid rgba(59, 130, 246, 0.2);
-            /* Animasi berjalan terus-menerus tanpa jeda */
-            animation: spin-smooth 0.8s linear infinite;
-            /* Memberikan efek cahaya (glow) seperti di gambar */
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
-        }
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gofile" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Gofile" />
+  <meta property="og:description" content="Secure, fast and free cloud storage solution. Upload and share files instantly." />
 
-        body {
-            background-color: #1a202c; /* Warna navy gelap sesuai gambar */
-        }
-    </style>
+  <meta property="og:url" content="gofile" />
+
+  <meta property="og:image" content="https://gofile.io/assets/img/logo-small-og.png" />
+  <meta property="og:image:width" content="300" />
+  <meta property="og:image:height" content="300" />
+  <meta property="og:image:alt" content="Gofile logo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@Gofile_io" />
+  <meta name="twitter:title" content="Gofile" />
+  <meta name="twitter:description" content="Secure, fast and free cloud storage solution. Upload and share files instantly." />
+  <meta name="twitter:image" content="https://gofile.io/assets/img/logo-small-og.png" />
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gofile.io/assets/img/favicon16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gofile.io/assets/img/favicon32.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="https://gofile.io/assets/img/favicon96.png" />
+
+   <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #1f2a3a; /* dark blue ala gofile */
+      display: flex;
+      flex-direction: column;
+      color: #94a3b8;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    /* HEADER */
+    header {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      background: #1b2533;
+    }
+
+    .menu-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-btn span,
+    .menu-btn span::before,
+    .menu-btn span::after {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 2px;
+      background: #fff;
+      position: relative;
+    }
+
+    .menu-btn span::before { top: -5px; position: absolute; }
+    .menu-btn span::after { top: 5px; position: absolute; }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* GOFILE-LIKE SPINNER */
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 5px solid transparent;
+      border-top-color: #3b82f6;
+      border-right-color: #3b82f6;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 20px 0 30px;
+      text-align: center;
+      font-size: 14px;
+      background: #1b2533;
+    }
+
+    footer a {
+      display: block;
+      color: #94a3b8;
+      text-decoration: none;
+      margin: 6px 0;
+    }
+  </style>
 </head>
-<body class="flex flex-col min-h-screen text-slate-400 font-sans selection:bg-blue-500/30">
+<body>
 
-    <!-- Header / Navbar -->
-    <header class="p-4 border-b border-white/5 flex items-center justify-between">
-        <button class="bg-[#3b82f6] p-2 rounded-md hover:bg-blue-500 transition-all active:scale-95 shadow-lg">
-            <!-- Icon Menu (Hamburger) -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
-    </header>
+  <header>
+    <div class="menu-btn"><span></span></div>
+  </header>
 
-    <!-- Main Content Area (Spinner Tengah) -->
-    <main class="flex-grow flex items-center justify-center">
-        <div class="spinner-container">
-            <div class="spinner-ring"></div>
-        </div>
-    </main>
+    <main id="content">
+    <div class="spinner" id="spinner"></div>
+  </main>
 
-    <!-- Footer Area -->
-    <footer class="py-12 px-6 text-center border-t border-white/5 space-y-8">
-        <!-- Tautan Navigasi -->
-        <nav class="flex flex-col space-y-4 text-[15px] tracking-wide">
-            <a href="#" class="hover:text-blue-400 transition-colors">Home</a>
-            <a href="#" class="hover:text-blue-400 transition-colors">Terms of Service</a>
-            <a href="#" class="hover:text-blue-400 transition-colors">Privacy Policy</a>
-            <a href="#" class="hover:text-blue-400 transition-colors">Copyright</a>
-            <a href="#" class="hover:text-blue-400 transition-colors">Contact</a>
-        </nav>
-        
-        <!-- Baris Hak Cipta -->
-        <div class="text-[13px] text-slate-500 pt-4">
-            WOJTEK SAS © 2026, made with 
-            <span class="inline-block animate-pulse text-red-500 mx-1">❤️</span> 
-            by Gofile Team
-        </div>
-    </footer>
+  <footer>
+    <a href="#">Home</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Copyright</a>
+    <a href="#">Contact</a>
+    <a href="#">made with ❤️ by G0fil Team</a>
+  </footer>
 
+  <script>
+    // spinner tampil 2 detik lalu hilang
+    setTimeout(() => {
+      const spinner = document.getElementById('spinner');
+      spinner.style.opacity = '0';
+      spinner.style.transition = 'opacity 0.3s ease';
+    }, 2000);
+  </script>
 
 <!-- ===== HISTATS (PAKSA ROOT) ===== -->
 <script>
